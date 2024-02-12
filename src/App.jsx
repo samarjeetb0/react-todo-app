@@ -15,7 +15,7 @@ function App() {
    *
    * also call as functional updates to avoid stale values during async updates
    */
-  const handleInputItem = (todoName, todoDate) => {
+  const addTodoItem = (todoName, todoDate) => {
     setItemList((currValue) => [
       ...currValue,
       {
@@ -25,18 +25,34 @@ function App() {
     ]);
   };
 
-  const handleDeleteItem = (todoName) => {
+  const deletTodoItem = (todoName) => {
     let newList = itemList.filter((item) => item.todoName !== todoName);
     setItemList(newList);
   };
 
   return (
-    <TodoItemsFromContext.Provider value={itemList}>
+    //value should be pass as an bject in the context provider so that later can be modified according to our need
+    // <TodoItemsFromContext.Provider
+    //   value={{
+    //     todoitems: itemList,
+    //     addTodoItem: addTodoItem,
+    //     deletTodoItem: deletTodoItem,
+    //   }}
+    // >
+    //same can be written as below
+
+    <TodoItemsFromContext.Provider
+      value={{
+        todoitems: itemList,
+        addTodoItem,
+        deletTodoItem,
+      }}
+    >
       <center className="todo-container">
         <AppName />
-        <AddTodoUsingUseRef getInputItem={handleInputItem} />
+        <AddTodoUsingUseRef />
         <WelcomeMessage />
-        <TodoItems deleteItem={handleDeleteItem} />
+        <TodoItems />
       </center>
     </TodoItemsFromContext.Provider>
   );

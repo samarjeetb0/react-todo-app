@@ -2,8 +2,9 @@ import { TodoItemsFromContext } from "../store/todo-items-store";
 import { useContext } from "react";
 import { TodoItem } from "./TodoItem";
 
-export const TodoItems = ({ deleteItem }) => {
-  const todoitems = useContext(TodoItemsFromContext);
+export const TodoItems = () => {
+  const { todoitems } = useContext(TodoItemsFromContext);
+
   return (
     <div className="items-container">
       {todoitems.map((item) => (
@@ -11,7 +12,6 @@ export const TodoItems = ({ deleteItem }) => {
           key={item.todoName}
           todoName={item.todoName}
           todoDate={item.todoDate}
-          deleteItem={deleteItem}
         />
       ))}
     </div>
